@@ -1,57 +1,47 @@
-// Contenedores Asociativos - Set y Multiset
+// Contenedores Asociativos - map y multimap
 
 #include<iostream>
 #include<iterator>
 #include<algorithm>
-#include<set> //para set y multiset
+#include<map> //map y multimap
 using namespace std;
 
+typedef pair<int,string> par;
+
 int main(){
-    multiset<int> valores;
+    map<int,string> valores; //creamos un mapa
     
-    //Insertamos elementos al multiset (multiconjunto)
-    valores.insert(10);
-    valores.insert(2);
-    valores.insert(5);
-    valores.insert(20);
-    valores.insert(3);
-    
-    //Mostrar en pantall
-    copy(valores.begin(),valores.end(),ostream_iterator<int> (cout,"|"));
-    cout<<endl;
-    
-    //Insertar valores duplicados
-    valores.insert(10);
-    valores.insert(3);
-    valores.insert(3);
-    valores.insert(3);
-    valores.insert(3);
-    
-    
-    //Mostrar en pantall
-    copy(valores.begin(),valores.end(),ostream_iterator<int> (cout,"|"));
-    cout<<endl;
-    
-    //Buscar un elememto en el multiset
-    multiset<int>::iterator i = valores.find(2);
+    //Insertar elementos en el map
+    valores.insert(par(5,"John 117"));
+    valores.insert(par(2,"Javier"));
+    valores.insert(par(1,"Ramon Ayala"));
+    valores.insert(par(4,"Fany Linux"));
 
+    //Mostrar el map en pantalla
+    map<int,string>::iterator i;
+    for(i=valores.begin();i != valores.end(); i++){
+        cout<<"Clave: "<<i->first<<" | Valor: "<<i->second<<endl;
+    }
+    cout<<endl;
+    
+    //Buscar un elemento en el map
+    i = valores.find(2);
+    
     if(i != valores.end()){
-        cout<<"\nEl elemento "<<*i<<" si ha sido encontrado "<<endl;
+    	cout<<"Valor encontrado "<<i->second<<endl;	
+	}
+	else{
+		cout<<"Valor no encontrado"<<endl;
+	}
+	
+	valores.erase(1);
+	
+	//Eliminar un elemento del map
+	for(i=valores.begin();i != valores.end(); i++){
+        cout<<"Clave: "<<i->first<<" | Valor: "<<i->second<<endl;
     }
-    else{
-        cout<<"\nEl elemento no ha sido encontrado "<<endl;
-    }
-
-    //Contar cuantas veces aparece el numero 3
-    cout<<"El numero 3 aparece "<<valores.count(3)
-    <<" veces en el multiset"<<endl;
-    
-    //Eliminar un elemento del multiset
-    valores.erase(3);
-    
-    //Mostrar en pantall
-    copy(valores.begin(),valores.end(),ostream_iterator<int> (cout,"|"));
     cout<<endl;
-
+	
+    
     return 0;
 }
