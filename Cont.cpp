@@ -7,33 +7,49 @@
 using namespace std;
 
 int main(){
-    set<int> valores; //Creando un set (Conjunto
+    multiset<int> valores;
     
-    //Insertamos elementos
-    valores.insert(5);
-    valores.insert(3);
+    //Insertamos elementos al multiset (multiconjunto)
     valores.insert(10);
-    valores.insert(1);
-    valores.insert(15);
+    valores.insert(2);
+    valores.insert(5);
+    valores.insert(20);
+    valores.insert(3);
     
-    //Mostrar nuestro set en pantalla
+    //Mostrar en pantall
     copy(valores.begin(),valores.end(),ostream_iterator<int> (cout,"|"));
     cout<<endl;
     
-    //Busqueda de un elemnento
-    set<int>::iterator i = valores.find(3);
+    //Insertar valores duplicados
+    valores.insert(10);
+    valores.insert(3);
+    valores.insert(3);
+    valores.insert(3);
+    valores.insert(3);
     
+    
+    //Mostrar en pantall
+    copy(valores.begin(),valores.end(),ostream_iterator<int> (cout,"|"));
+    cout<<endl;
+    
+    //Buscar un elememto en el multiset
+    multiset<int>::iterator i = valores.find(2);
+
     if(i != valores.end()){
-        cout<<"\nEl elemento "<<*i<<" si ha sido encontrado"<<endl;
+        cout<<"\nEl elemento "<<*i<<" si ha sido encontrado "<<endl;
     }
     else{
-        cout<<"El elemento no ha sido encontrado"<<endl;
+        cout<<"\nEl elemento no ha sido encontrado "<<endl;
     }
+
+    //Contar cuantas veces aparece el numero 3
+    cout<<"El numero 3 aparece "<<valores.count(3)
+    <<" veces en el multiset"<<endl;
     
-    //Eliminar un elemento del set (conjunto)
-    valores.erase(1);
+    //Eliminar un elemento del multiset
+    valores.erase(3);
     
-    //Mostrar nuestro set en pantalla
+    //Mostrar en pantall
     copy(valores.begin(),valores.end(),ostream_iterator<int> (cout,"|"));
     cout<<endl;
 
