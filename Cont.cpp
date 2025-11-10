@@ -3,45 +3,38 @@
 #include<iostream>
 #include<iterator>
 #include<algorithm>
-#include<map> //map y multimap
+#include<map> 
 using namespace std;
 
 typedef pair<int,string> par;
 
 int main(){
-    map<int,string> valores; //creamos un mapa
-    
-    //Insertar elementos en el map
-    valores.insert(par(5,"John 117"));
-    valores.insert(par(2,"Javier"));
-    valores.insert(par(1,"Ramon Ayala"));
-    valores.insert(par(4,"Fany Linux"));
+    multimap<int,string> valores;
 
-    //Mostrar el map en pantalla
-    map<int,string>::iterator i;
-    for(i=valores.begin();i != valores.end(); i++){
+    //Insertar valores
+    valores.insert(par(3,"Estefany"));
+    valores.insert(par(1,"Luis"));
+    valores.insert(par(5,"Alejandro"));
+    valores.insert(par(2,"Maria"));
+
+    //Insertamos pares con claves repetidas 
+    valores.insert(par(1,"Carla"));
+    valores.insert(par(5,"Paola"));
+    valores.insert(par(5,"Fernando"));
+
+    //Mostrar en pantalla el multimap
+    multimap<int,string>::iterator i;
+    for(i=valores.begin(); i!=valores.end();i++){
         cout<<"Clave: "<<i->first<<" | Valor: "<<i->second<<endl;
     }
     cout<<endl;
-    
-    //Buscar un elemento en el map
-    i = valores.find(2);
-    
-    if(i != valores.end()){
-    	cout<<"Valor encontrado "<<i->second<<endl;	
-	}
-	else{
-		cout<<"Valor no encontrado"<<endl;
-	}
-	
-	valores.erase(1);
-	
-	//Eliminar un elemento del map
-	for(i=valores.begin();i != valores.end(); i++){
-        cout<<"Clave: "<<i->first<<" | Valor: "<<i->second<<endl;
+
+    //Conteo de las claves
+    int clave = 1;
+    cout<<"Conteo de la clave "<<clave<<": "<<valores.count(clave)<<endl;
+    for(i=valores.lower_bound(clave);i!=valores.upper_bound(clave);i++){
+        cout<<i->second<<" | ";
+ 
     }
-    cout<<endl;
-	
-    
     return 0;
 }
